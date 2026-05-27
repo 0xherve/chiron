@@ -15,13 +15,13 @@ AI writing feedback tool. Upload or paste text, get structured rubric grading, a
 
 ```bash
 bun install
-bun --bun run dev
+bun dev
 ```
 
 ## Building for Production
 
 ```bash
-bun --bun run build
+bun run build
 ```
 
 ## Project Structure
