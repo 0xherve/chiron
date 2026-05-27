@@ -3,45 +3,43 @@
 ## Tables
 
 **Users**
-- `id` (PK, WorkOS user id)
-- `name` (cached)
-- `created_at`
+- `email`
+- `name`
+- `avatarUrl` (optional)
+- `createdAt`, `updatedAt`
 
 **Rubrics**
-- `id` (PK)
-- `user_id` (FK → Users)
-- `definition` (JSONB)
-- `created_at`, `updated_at`
+- `userId` (FK → Users)
+- `definition` (JSON)
+- `createdAt`, `updatedAt`
 
 **Threads**
-- `id` (PK)
-- `user_id` (FK → Users)
-- `rubric_id` (FK → Rubrics) — set once at creation, immutable
-- `title` (nullable, AI-generated or user-edited)
-- `created_at`, `updated_at`
+- `userId` (FK → Users)
+- `rubricId` (FK → Rubrics) — set once at creation, immutable
+- `title` (optional, AI-generated or user-edited)
+- `createdAt`, `updatedAt`
 
 **Documents**
-- `id` (PK)
-- `thread_id` (FK → Threads)
+- `threadId` (FK → Threads)
 - `docRef` (R2 object key)
-- `filename`, `size`, `mime_type`
-- `created_at`
+- `wordCount`
+- `createdAt`
 
 **Gradings**
-- `id` (PK)
-- `thread_id` (FK → Threads)
-- `rubric_id` (FK → Rubrics)
-- `document_id` (FK → Documents)
-- `result` (JSONB)
-- `created_at`
+- `threadId` (FK → Threads)
+- `rubricId` (FK → Rubrics)
+- `documentId` (FK → Documents)
+- `status` (`pending` | `completed` | `failed`)
+- `overallScore` (optional)
+- `summary` (optional)
+- `createdAt`
 
 **Messages**
-- `id` (PK)
-- `thread_id` (FK → Threads)
+- `threadId` (FK → Threads)
 - `role` (`user` | `assistant` | `system`)
 - `kind` (`text` | `document_upload` | `system`)
-- `content` (text)
-- `created_at`
+- `content`
+- `createdAt`
 
 ## Relationships & Rules
 
